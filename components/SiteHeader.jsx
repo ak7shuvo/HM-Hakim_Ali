@@ -10,7 +10,7 @@ const DESKTOP_MIN = 1241; // keep in sync with the @media (max-width:1240px) nav
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [condensed, setCondensed] = useState(false);
-  const pathname = usePathname();
+  const pathname = usePathname() || "";
   const toggleRef = useRef(null);
   const menuRef = useRef(null);
   const isActive = (href) => pathname === href || pathname.startsWith(`${href}/`);
@@ -62,17 +62,17 @@ export default function SiteHeader() {
   }, [open]);
 
   return (
-    <header className={`site-header-wrap ${condensed ? "is-condensed" : ""}`.trim()}>
+    <header className={`site-header-wrap ${condensed ? "is-condensed" : ""}`.trim()} data-menu={open ? "open" : "closed"}>
       <div className="site-header container">
         <Link className="brand" href="/" aria-label={`${site.name} — home`}>
           <span className="brand-mark" aria-hidden="true">{site.initials}</span>
           <span className="brand-text"><strong>{site.name}</strong></span>
         </Link>
         <nav className="nav-desktop" aria-label="Primary">{navLinks.map((l) => <Link key={l.href} href={l.href} className={isActive(l.href) ? "is-active" : ""} aria-current={isActive(l.href) ? "page" : undefined}>{l.label}</Link>)}</nav>
-        <Link className="btn btn-dark btn-sm nav-cta" href="/contact">Connect</Link>
-        <button ref={toggleRef} type="button" className="nav-toggle" aria-label="Menu" aria-expanded={open} aria-controls="mobile-nav" onClick={() => setOpen((v) => !v)}>{open ? <X size={20} strokeWidth={1.5} aria-hidden="true" /> : <Menu size={20} strokeWidth={1.5} aria-hidden="true" />}</button>
+        <Link className="btn btn-dark btn-sm nav-cta" href="/contact" aria-current={isActive("/contact") ? "page" : undefined}>Connect</Link>
+        <button ref={toggleRef} type="button" className="nav-toggle" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} aria-controls="mobile-nav" onClick={() => setOpen((v) => !v)}>{open ? <X size={20} strokeWidth={1.5} aria-hidden="true" /> : <Menu size={20} strokeWidth={1.5} aria-hidden="true" />}</button>
       </div>
-      {open && <nav id="mobile-nav" ref={menuRef} className="nav-mobile" aria-label="Primary">{navLinks.map((l) => <Link key={l.href} href={l.href} className={isActive(l.href) ? "is-active" : ""} aria-current={isActive(l.href) ? "page" : undefined}>{l.label}</Link>)}<Link className="btn btn-gold" href="/contact">Connect</Link></nav>}
+      {open && <nav id="mobile-nav" ref={menuRef} className="nav-mobile" aria-label="Primary">{navLinks.map((l) => <Link key={l.href} href={l.href} className={isActive(l.href) ? "is-active" : ""} aria-current={isActive(l.href) ? "page" : undefined} onClick={() => { if (isActive(l.href)) setOpen(false); }}>{l.label}</Link>)}<Link className="btn btn-gold" href="/contact" aria-current={isActive("/contact") ? "page" : undefined} onClick={() => { if (isActive("/contact")) setOpen(false); }}>Connect</Link></nav>}
     </header>
   );
 }

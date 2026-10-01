@@ -1,8 +1,10 @@
 import Status from "@/components/Status";
 // Editorial row: replaces boxed cards for roles, education and archive entries.
+// The stagger index is capped so rows far down a long ledger never wait on a long delay.
 export default function LedgerRow({ year, label, status, title, org, meta, text, i = 0 }) {
+  const stagger = Math.min(Math.max(Number(i) || 0, 0), 8);
   return (
-    <article className="ledger-row rise" style={{ "--i": i }}>
+    <article className="ledger-row rise" style={{ "--i": stagger }}>
       <div className="ledger-side">
         {year && <span className="ledger-year">{year}</span>}
         {label && <span className="ledger-label">{label}</span>}
