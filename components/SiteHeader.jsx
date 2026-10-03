@@ -1,0 +1,108 @@
+"use client";
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Menu, X, ArrowUpRight } from "lucide-react";
+import { navLinks, site } from "@/lib/content";
+
+const DESKTOP_MIN = 1180; // keep in sync with the @media (min-width:1180px) nav breakpoint in globals.css
+
+export default function SiteHeader() {
+  const [open, setOpen] = useState(false);
+  const [condensed, setCondensed] = useState(false);
+  const pathname = usePathname() || "";
+  const toggleRef = useRef(null);
+  const menuRef = useRef(null);
+  const isActive = (href) => pathname === href || pathname.startsWith(`${href}/`);
+
+  // Close on route change.
+  useEffect(() => { setOpen(false); }, [pathname]);
+
+  // Condensed state once the page has scrolled. Only sets state when the value flips.
+  useEffect(() => {
+    let frame = 0;
+    let last = false;
+    const check = () => {
+      const next = window.scrollY > 24;
+      if (next !== last) { last = next; setCondensed(next); }
+    };
+    const onScroll = () => { cancelAnimationFrame(frame); frame = requestAnimationFrame(check); };
+    check();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => { cancelAnimationFrame(frame); window.removeEventListener("scroll", onScroll); };
+  }, []);
+
+  // Open menu: move focus in, contain Tab, close on Esc (focus back to toggle), lock scroll,
+  // make the page behind inert, and close if the viewport grows past the mobile breakpoint.
+  useEffect(() => {
+    if (!open) return undefined;
+    const behind = Array.from(document.querySelectorAll("main, .site-footer, .to-top"));
+    behind.forEach((el) => el.setAttribute("inert", ""));
+    document.body.classList.add("menu-open");
+    menuRef.current?.querySelector("a[href]")?.focus();
+
+    const onKey = (event) => {
+      if (event.key === "Escape") { event.preventDefault(); setOpen(false); toggleRef.current?.focus(); return; }
+      if (event.key !== "Tab") return;
+      const stops = [toggleRef.current, ...menuRef.current.querySelectorAll("a[href]")].filter(Boolean);
+      const first = stops[0];
+      const last = stops[stops.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    };
+    const onResize = () => { if (window.innerWidth >= DESKTOP_MIN) setOpen(false); };
+    document.addEventListener("keydown", onKey);
+    window.addEventListener("resize", onResize);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      window.removeEventListener("resize", onResize);
+      behind.forEach((el) => el.removeAttribute("inert"));
+      document.body.classList.remove("menu-open");
+    };
+  }, [open]);
+
+  const closeIfCurrent = (href) => () => { if (isActive(href)) setOpen(false); };
+
+  return (
+    <header className={`site-header-wrap ${condensed ? "is-condensed" : ""}`.trim()} data-menu={open ? "open" : "closed"}>
+      <div className="site-header container">
+        <Link className="brand" href="/" aria-label={`${site.name} — home`} aria-current={pathname === "/" ? "page" : undefined}>
+          <span className="brand-mark" aria-hidden="true">{site.initials}</span>
+          <span className="brand-text"><strong>{site.name}</strong><small>{site.tagline}</small></span>
+        </Link>
+        <nav className="nav-desktop" aria-label="Primary">
+          {navLinks.map((l) => (
+            <Link key={l.href} href={l.href} className={isActive(l.href) ? "is-active" : ""} aria-current={isActive(l.href) ? "page" : undefined}>{l.label}</Link>
+          ))}
+        </nav>
+        <Link className="btn btn-dark btn-sm nav-cta" href="/contact" aria-current={isActive("/contact") ? "page" : undefined} onClick={closeIfCurrent("/contact")}>
+          <span>Connect</span><ArrowUpRight className="btn-icon" size={14} strokeWidth={1.75} aria-hidden="true" />
+        </Link>
+        <button ref={toggleRef} type="button" className="nav-toggle" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} aria-controls="mobile-nav" onClick={() => setOpen((v) => !v)}>
+          {open ? <X size={20} strokeWidth={1.6} aria-hidden="true" /> : <Menu size={20} strokeWidth={1.6} aria-hidden="true" />}
+        </button>
+      </div>
+      {open && (
+        <nav id="mobile-nav" ref={menuRef} className="nav-sheet" aria-label="Primary">
+          <ol role="list">
+            {[{ href: "/", label: "Home" }, ...navLinks, { href: "/contact", label: "Contact" }].map((l, n) => {
+              const current = l.href === "/" ? pathname === "/" : isActive(l.href);
+              return (
+                <li key={l.href}>
+                  <Link href={l.href} className={`sheet-link${current ? " is-active" : ""}`} style={{ "--n": n }} aria-current={current ? "page" : undefined} onClick={() => { if (current) setOpen(false); }}>
+                    <span className="meta" aria-hidden="true">{String(n + 1).padStart(2, "0")}</span>
+                    {l.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ol>
+          <div className="sheet-foot">
+            <span className="meta">{site.location}</span>
+            <a className="link-arrow" href={site.linkedin} target="_blank" rel="noopener noreferrer"><span>LinkedIn<span className="visually-hidden"> (opens in a new tab)</span></span></a>
+          </div>
+        </nav>
+      )}
+    </header>
+  );
+}

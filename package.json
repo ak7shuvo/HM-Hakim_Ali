@@ -1,0 +1,23 @@
+{
+  "name": "hm-hakim-ali-portfolio",
+  "version": "3.0.0",
+  "description": "H. M. Hakim Ali \u2014 professional legacy portfolio (v3.0, \"Ledger & Lattice\" design system)",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "check": "node scripts/check-colours.mjs && node scripts/audit-css.mjs"
+  },
+  "dependencies": {
+    "next": "14.2.35",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "lucide-react": "^0.468.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "eslint-config-next": "14.2.35"
+  }
+}
