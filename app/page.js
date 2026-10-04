@@ -31,6 +31,105 @@ const scope = [
   { title: "International", text: "Honorary consular representation and global tourism networking." },
 ];
 
+const hotelAward = {
+  hotel: "Hotel Agrabad",
+  title: "Best Four-Star Hotel",
+  award: "Bangladesh Tourism Award 2026",
+  presenter: "Bangladesh Tourism Board",
+};
+
+const hotelAwardCss = `
+.hosp-award{
+  position:relative;
+  margin:1.75rem 0 .5rem;
+  padding:1.15rem 1.3rem 1.15rem 1.5rem;
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr);
+  gap:1rem 1.2rem;
+  align-items:center;
+  background:linear-gradient(135deg,#fbf6ea 0%,#f3ead6 100%);
+  border:1px solid rgba(176,141,87,.45);
+  color:#17130e;
+  box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 10px 28px -18px rgba(23,19,14,.35);
+}
+.hosp-award::before{
+  content:"";
+  position:absolute;
+  left:0;top:0;bottom:0;
+  width:3px;
+  background:linear-gradient(180deg,#c9a66b,#9a7842);
+}
+.hosp-award::after{
+  content:"";
+  position:absolute;
+  inset:4px;
+  border:1px solid rgba(176,141,87,.22);
+  pointer-events:none;
+}
+.hosp-award__seal{
+  width:3.5rem;height:3.5rem;
+  display:grid;place-items:center;
+  border-radius:50%;
+  color:#c9a66b;
+  background:#17130e;
+  border:1px solid #9a7842;
+  box-shadow:0 0 0 3px #f6eedc,0 0 0 4px rgba(176,141,87,.55);
+  flex-shrink:0;
+}
+.hosp-award__seal svg{width:1.55rem;height:1.55rem;display:block}
+.hosp-award__body{min-width:0}
+.hosp-award__kicker{
+  margin:0 0 .35rem;
+  display:flex;align-items:center;gap:.6rem;
+  font-size:.68rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:#8a6a36;
+  font-weight:600;
+}
+.hosp-award__kicker::after{
+  content:"";
+  flex:1;
+  height:1px;
+  background:linear-gradient(90deg,rgba(176,141,87,.6),transparent);
+}
+.hosp-award__title{
+  margin:0;
+  font-size:clamp(1.25rem,2.4vw,1.6rem);
+  line-height:1.15;
+  font-weight:500;
+  letter-spacing:-.005em;
+  color:#17130e;
+}
+.hosp-award__sub{
+  margin:.35rem 0 0;
+  font-size:.92rem;
+  line-height:1.4;
+  color:#3b3328;
+}
+.hosp-award__sub strong{font-weight:600;color:#17130e}
+.hosp-award__foot{
+  margin:.7rem 0 0;
+  padding-top:.6rem;
+  border-top:1px solid rgba(176,141,87,.35);
+  display:flex;flex-wrap:wrap;gap:.25rem .9rem;
+  font-size:.7rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:#6e5a3a;
+}
+.hosp-award__foot b{font-weight:600;color:#17130e}
+@media (max-width:520px){
+  .hosp-award{
+    grid-template-columns:1fr;
+    padding:1.1rem 1.1rem 1.1rem 1.35rem;
+    gap:.85rem;
+  }
+  .hosp-award__seal{width:3rem;height:3rem}
+  .hosp-award__seal svg{width:1.3rem;height:1.3rem}
+}
+`;
+
 export default function Home() {
   return (
     <>
@@ -165,6 +264,31 @@ export default function Home() {
                 business leadership, tourism associations, international networking and public tourism-sector dialogue.
               </p>
             </Reveal>
+
+            {/* Award recognition */}
+            <style dangerouslySetInnerHTML={{ __html: hotelAwardCss }} />
+            <Reveal delay={160}>
+              <aside className="hosp-award" role="group" aria-label={`Award recognition: ${hotelAward.title}`}>
+                <span className="hosp-award__seal" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2.8l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16l-5.2 2.8 1-5.8-4.2-4.1 5.8-.8L12 2.8z" />
+                    <path d="M8.5 20.6h7" />
+                  </svg>
+                </span>
+                <div className="hosp-award__body">
+                  <p className="hosp-award__kicker">Award recognition</p>
+                  <h3 className="hosp-award__title">{hotelAward.title}</h3>
+                  <p className="hosp-award__sub">
+                    <strong>{hotelAward.hotel}</strong> · {hotelAward.award}
+                  </p>
+                  <p className="hosp-award__foot">
+                    <span>Presented by</span>
+                    <b>{hotelAward.presenter}</b>
+                  </p>
+                </div>
+              </aside>
+            </Reveal>
+
             <ol className="mini-chron" role="list">
               {hospitality.map((h, i) => (
                 <Reveal as="li" key={h.period} delay={i * 90}>
