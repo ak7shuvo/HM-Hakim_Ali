@@ -1,3 +1,22 @@
+# QA-REPORT — v3.1 (News & Media)
+
+Run against the production build (Chromium via Playwright). Same limits as v3.0 below (no Lighthouse/axe; Chromium only).
+- `npm run lint`: no warnings or errors. `npm run check`: 0 contrast failures, 0 unused classes/tokens, 0 colour literals outside `:root`.
+- `npm run build`: 19/19 static pages; `/news` 1.69 kB, 97.7 kB first load.
+- Page × width matrix (`scripts/qa/matrix.py`, now 11 routes × 10 widths = 110 runs): final run 110/110 pass. An earlier
+  pass flagged one run that only logged Next.js "Failed to fetch RSC payload" prefetch aborts caused by the harness navigating
+  mid-prefetch (the same artefact noted for v3.0). Nav fit at 1180 px: 63 px brand→nav, 30 px nav→CTA.
+- Existing interaction suite (`scripts/qa/interact.py`): 32/32 pass — existing pages and behaviour intact.
+- News suite (`scripts/qa/news.py`): 18/18 pass — header/footer links and current state; 14 articles; reverse chronological;
+  16 external links open in a new tab with `noopener` and match the dossier URLs exactly; all 14 headlines verbatim;
+  year 2025 → 9, 2026 → 5 (2025 group hidden); 2025 ∩ BIHA Activities → 4, announced; URL restore on reload; reset;
+  disabled empty categories; deep link `?category=Awards & Recognition` → 2; institutional references; one `h1`;
+  filtered cards fully visible after the stagger.
+- Visual review: `/news` at 1440, 768 and 390 px with no horizontal overflow; header at 1180 px with eight links.
+- **Not done:** opening the 16 external URLs (outbound access blocked here). Click through after deploy.
+
+---
+
 # QA-REPORT — v3.0
 
 Everything below was **actually executed** in the v3.0 authoring environment (Linux, Node 22.22, Chromium via Playwright 1.56,

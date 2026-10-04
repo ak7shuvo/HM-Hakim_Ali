@@ -2,7 +2,7 @@ import os
 BASE = os.environ.get("BASE", "http://localhost:3000")  # running `npm run start`
 import asyncio, json
 from playwright.async_api import async_playwright
-ROUTES=["/","/about","/career","/experience","/education","/skills","/achievements","/gallery","/contact","/does-not-exist"]
+ROUTES=["/","/about","/career","/experience","/education","/skills","/achievements","/gallery","/news","/contact","/does-not-exist"]
 WIDTHS=[1920,1440,1280,1180,1024,768,480,390,360,320]
 CHECK="""() => {
  const r={};

@@ -1,5 +1,21 @@
 # Changelog
 
+## v3.1 — News & Media coverage
+**New page `/news`** — "News & media coverage": the 14 articles from the News & Media dossier (2025–2026), newest first,
+grouped by year. Each editorial card shows publication, date, headline, the dossier summary, topic, categories and a
+"Read full article" link (new tab, `rel="noopener noreferrer"`, link text announces headline and publisher).
+**Filtering** — year and category chips with live counts (categories with no matching coverage are disabled), combined
+filters, polite result announcements, "Show all coverage", and the selection kept in the URL (`?year=…&category=…`).
+Cards stay in the HTML when hidden, so no-JS visitors, print and search engines get the full archive.
+**Institutional references** — BIHA and World Tourism Network profiles in their own subsection.
+**Navigation** — "News" added to the header, mobile menu and footer (all read `navLinks`); sitemap picks it up automatically.
+Contact's page number moves from 08 to 09 so the numbering follows the menu. Between 1180 and 1339 px the brand tagline is
+hidden so eight links fit the header.
+**SEO** — page metadata, canonical, Open Graph, breadcrumb and an `ItemList` of the articles in JSON-LD.
+**Files** — added `lib/news.js`, `components/NewsCard.jsx`, `components/NewsFilters.jsx`, `app/news/page.js`, `scripts/qa/news.py`;
+changed `lib/content.js` (nav link, version), `app/contact/page.js` (page number), `app/globals.css` (appended News styles),
+`package.json` (3.1.0), `scripts/qa/matrix.py` (adds `/news`). No new dependencies. Other pages unchanged.
+
 ## v3.0 — "Ledger & Lattice": complete visual and interaction rebuild
 **Design system** — `app/globals.css` rewritten from scratch around tokens: new paper/ink/brass palette with a restrained oxblood accent
 and a night band; fluid `clamp()` type scale; one radius, elevation, easing and duration scale. All colour literals live in `:root`

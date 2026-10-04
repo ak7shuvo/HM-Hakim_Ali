@@ -1,6 +1,6 @@
-# H. M. Hakim Ali — Professional Legacy Portfolio · v3.0
+# H. M. Hakim Ali — Professional Legacy Portfolio · v3.1
 
-A ten-route Next.js 14 portfolio for H. M. Hakim Ali (tourism, hospitality, business and international engagement, Chattogram, Bangladesh).
+An eleven-route Next.js 14 portfolio for H. M. Hakim Ali (tourism, hospitality, business and international engagement, Chattogram, Bangladesh).
 v3.0 is a full visual and interaction rebuild — the **"Ledger & Lattice"** design system — on the same stack, routes and content as v2.0.
 
 ## Quick start
@@ -51,6 +51,7 @@ The build has **no network dependency**: all three typefaces are self-hosted in 
 | `/skills` | Expertise | Bento of six groups, languages; no percentages or scores |
 | `/achievements` | Recognition | Featured 2025 Tourism Hero, filterable archive, yellow/red verification lists |
 | `/gallery` | Gallery | Scatter → organise interaction, keyboard/touch lightbox on native `<dialog>` |
+| `/news` | News & Media | 14 press articles (2025–2026), newest first, year + category filters (`?year=`, `?category=`), institutional references |
 | `/contact` | Contact | LinkedIn action, copy-link with feedback, location, profile link |
 | any other | 404 | Designed not-found page (`noindex`) |
 
@@ -97,7 +98,7 @@ scripts/               dependency-free audits used by `npm run check`
 
 ## Editing content
 
-Edit `lib/content.js` only — pages read from it. Status wording drives the marker shape through `lib/status.js`; it never rewrites text.
+Edit `lib/content.js` (and `lib/news.js` for press coverage) — pages read from them. To add an article, append an object to `news` with the publisher's exact headline, date and URL; ordering, year groups, counts and filters update automatically. Status wording drives the marker shape through `lib/status.js`; it never rewrites text.
 Do not add dates, roles, awards, statistics, quotes or credentials that are not in the research record (see `PROJECT-STATE.md`).
 
 ## Documentation

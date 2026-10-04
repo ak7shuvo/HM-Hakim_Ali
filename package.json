@@ -1,7 +1,7 @@
 {
   "name": "hm-hakim-ali-portfolio",
-  "version": "3.0.0",
-  "description": "H. M. Hakim Ali \u2014 professional legacy portfolio (v3.0, \"Ledger & Lattice\" design system)",
+  "version": "3.1.0",
+  "description": "H. M. Hakim Ali \u2014 professional legacy portfolio (v3.1, \"Ledger & Lattice\" design system)",
   "private": true,
   "scripts": {
     "dev": "next dev",

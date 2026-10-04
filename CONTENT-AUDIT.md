@@ -72,3 +72,20 @@ from that recognition's own title, organisation and year is shown instead; it is
 photograph to `public/images/awards/` restores a photo frame automatically.
 
 Still open: items 1–7 above and the v1.8 photograph questions (who is pictured, image rights, the archival photograph).
+
+## v3.1 addendum — News & Media dossier
+Source: `HM_Hakim_Ali_News_Media_Dossier_2025_2026.md` (last compiled October 2026), transcribed into `lib/news.js`.
+Headlines, dates, publication names, summaries, topics and URLs are verbatim. Checked automatically by `scripts/qa/news.py`:
+all 14 headlines appear exactly, and the set of 16 links on the page equals the set of URLs in the dossier.
+Categories come from the dossier's suggested list; assigning one or two to each article was an editorial choice.
+
+**Links were not opened from the build environment** (outbound web access was blocked), so whether each publisher page is
+still live could not be confirmed. Please click through once after deploying.
+
+Points to confirm with the client — the press items are presented as what each outlet reported, but they differ from the
+existing research baseline in `lib/content.js`, which was not changed:
+1. Two 2025 BIHA items (Bangladesh Monitor, 1 June 2025; The Daily Star, 27 April 2025) describe him as **BIHA President**,
+   while the site's record says the 2024–2026 committee named another President and him Past President / Chief Advisor.
+2. The BIHA official profile calls him **Founder President** of BIHA; the site's record dates his presidency from 2012.
+3. The Daily Sun (13 October 2025) reports a **Lifetime Achievement Award in Tourism**. It is not in the Recognition archive;
+   add it there only once the award's issuing body is confirmed.

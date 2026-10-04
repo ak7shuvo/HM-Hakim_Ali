@@ -14,7 +14,7 @@ export const metadata = pageMetadata({ title: "Contact", description: intro, pat
 export default function Contact() {
   return (
     <>
-      <PageHeader index="08" label="Contact" path="/contact" title="Professional connection." intro={intro} />
+      <PageHeader index="09" label="Contact" path="/contact" title="Professional connection." intro={intro} />
 
       <section className="section" aria-labelledby="connect-heading">
         <div className="container contact">
