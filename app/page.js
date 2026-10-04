@@ -165,19 +165,26 @@ export default function Home() {
 
             <div className="hero-figure hero-in" style={{ "--d": "260ms" }}>
               <Lattice id="hero-lattice" parallax="-0.08" />
-              <ArchivalFrame
-                priority
-                plate
-                dir="portrait"
-                fallbackDir="hero"
-                alt={`Portrait of ${site.name}`}
-                placeholder="Portrait — to be supplied"
-                caption={site.location}
-                figure={site.coordinates}
-                ratio="4 / 5"
-                position="50% 22%"
-                sizes="(max-width: 980px) 86vw, 34vw"
-              />
+              <div className="hero-arch">
+                <div className="hero-arch__portrait">
+                  <ArchivalFrame
+                    priority
+                    dir="portrait"
+                    fallbackDir="hero"
+                    alt={`Portrait of ${site.name}`}
+                    placeholder="Portrait — to be supplied"
+                    caption={site.location}
+                    figure={site.coordinates}
+                    ratio="4 / 5"
+                    position="50% 22%"
+                    sizes="(max-width: 980px) 86vw, 34vw"
+                  />
+                  <p className="hero-honor">
+                    <span>Tourism Hero</span>
+                    <span>2025</span>
+                  </p>
+                </div>
+              </div>
               <div className="hero-tag">
                 <span className="meta">Since 1971</span>
                 <strong>Hotel Agrabad</strong>

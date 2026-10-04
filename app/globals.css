@@ -337,17 +337,25 @@ html.js .sh[data-reveal].is-in .sh-line{transform:scaleX(1)}
 .hero-name{margin-bottom:clamp(1.5rem,3vw,2.25rem)}
 .hero-name .hn-pre{display:block;font:400 clamp(1.4rem,.9rem + 2.4vw,3rem)/1 var(--serif);letter-spacing:-.01em;color:var(--brass-ink);font-style:italic;margin-bottom:.12em}
 .hero-roles{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:clamp(1.5rem,3vw,2rem)}
-.hero-roles li{padding:8px 14px;border:1px solid var(--line-strong);border-radius:var(--r-pill);font:500 .78rem/1.2 var(--sans);color:var(--ink-2);background:var(--glass-soft)}
+.hero-roles li{padding:8px 14px;border:1px solid var(--line);border-radius:var(--r-pill);font:500 .78rem/1.2 var(--sans);color:var(--ink-2);background:rgba(251,248,242,.28)}
 .hero .t-lead{margin-bottom:clamp(1.75rem,3vw,2.5rem)}
 .hero-figure{position:relative;max-width:min(520px,100%);width:100%;justify-self:center}
 @media (max-width:979px){.hero-figure{max-width:420px}}
 @media (min-width:980px){.hero-figure{justify-self:end}}
-.hero-figure .lattice{inset:-14% -22% 6% 18%;opacity:.55}
+.hero-figure .lattice{inset:-14% -22% 6% 18%;opacity:.4}
 .hero-figure .frame{position:relative;z-index:1}
-.hero-tag{position:absolute;z-index:2;left:clamp(-28px,-2vw,-12px);bottom:clamp(64px,10%,92px);display:grid;gap:4px;padding:14px 18px;border-radius:var(--r-md);background:var(--ink);color:var(--bone);box-shadow:var(--shadow-3)}
+.hero-tag{position:absolute;z-index:2;left:clamp(-28px,-2vw,-12px);bottom:clamp(64px,10%,92px);display:grid;gap:4px;padding:14px 18px;border-radius:var(--r-md);background:rgba(26,22,17,.78);border:1px solid var(--line-night-strong);color:var(--bone);box-shadow:0 14px 34px -16px rgba(26,22,17,.45)}
 .hero-tag .meta{color:var(--champagne)}
 .hero-tag strong{font:400 1.15rem/1.15 var(--serif)}
 @media (max-width:600px){.hero-tag{left:12px;bottom:58px}}
+/* Hero portrait: slim brass-hairline frame with offset outline, soft shadow, faint arch behind */
+.hero-arch{position:relative;isolation:isolate;width:100%;margin-inline:auto;padding:clamp(1.5rem,3vw,2.4rem) clamp(.5rem,2vw,1.5rem) 0}
+.hero-arch::before{content:"";position:absolute;z-index:-1;inset:0 0 clamp(2rem,4vw,2.6rem);border-radius:999px 999px 0 0;border:1px solid var(--line-brass);border-bottom:0;background:linear-gradient(180deg,rgba(173,135,67,.14),rgba(173,135,67,.04) 55%,transparent)}
+.hero-arch__portrait{position:relative}
+.hero-figure .frame-media{border-radius:var(--r-sm);background:var(--paper-3);border:1px solid var(--line-brass);box-shadow:0 22px 44px -26px rgba(26,22,17,.38),0 2px 6px rgba(26,22,17,.06);outline:1px solid rgba(173,135,67,.32);outline-offset:7px}
+.hero-honor{position:absolute;z-index:2;right:12px;bottom:3.1rem;display:grid;gap:3px;margin:0;padding:8px 14px 8px 12px;border-left:2px solid var(--brass);background:rgba(251,248,242,.6);font:500 .66rem/1.2 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ink)}
+.hero-honor span:last-child{color:var(--brass-ink)}
+@media (max-width:600px){.hero-honor{bottom:2.6rem;padding:6px 11px 6px 10px}}
 .facts{display:grid;margin-top:clamp(3rem,6vw,5rem);border-top:1px solid var(--line-strong)}
 @media (min-width:720px){.facts{grid-template-columns:repeat(3,1fr)}}
 .fact{display:grid;grid-template-columns:auto 1fr;gap:4px 20px;align-items:baseline;padding:clamp(1.25rem,2.4vw,2rem) 0;border-bottom:1px solid var(--line)}
